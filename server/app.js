@@ -20,11 +20,13 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
-//upload files
-const upload =multer({
-    dest: './uploads',
+//--------MULTER DESTINATIONS FOR  File uploading-----------
+//upload files for elementary
+const upload_dimotiko =multer({
+    dest: './uploads/dimotiko',
 })
+
+//
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -32,8 +34,8 @@ app.use('/students', student);
 
 var port = 1234;
 
-
-app.post('/upload',upload.single('file'),(req,res) =>{
+//------MULTER POST FOR FILE UPLOADING
+app.post('/upload/dimotiko',upload_dimotiko.single('file'),(req,res) =>{
     res.json({file:req.file})
 })
 app.listen(port, () => {
